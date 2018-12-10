@@ -9,7 +9,7 @@
           <el-input v-model="info.user" type="text" clearable></el-input>
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
-          <el-input v-model.number="info.phone" type="number" clearable></el-input>
+          <el-input v-model.number="info.phone" type="text" clearable></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="psw">
           <el-input v-model="info.psw" type="password" clearable></el-input>

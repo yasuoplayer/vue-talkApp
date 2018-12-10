@@ -41,16 +41,32 @@ export default {
       load: false
     }
   },
+  mounted () {
+    let userinfo = localStorage.getItem('userInfo')
+    if (userinfo) {
+      userinfo = JSON.parse(userinfo)
+      this.info.phone = userinfo.phone
+      this.info.psw = userinfo.psw
+    }
+  },
   methods: {
     login () {
       this.load = true
-      let { phone, psw } = this.info
+      let { phone, psw, remember } = this.info
       axios.post('/user/login', { phone, psw })
         .then((res) => {
           if (res.data.code === 0) {
             this.$message.error(res.data.msg)
             this.load = false
             return
+          }
+          if (remember) {
+            const userInfo = {
+              phone,
+              psw
+            }
+
+            localStorage.setItem('userInfo', JSON.stringify(userInfo))
           }
           this.$store.commit('setInfo', res.data.data[0])
           this.load = false
